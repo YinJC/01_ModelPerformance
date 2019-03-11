@@ -63,7 +63,7 @@ def reliability_diagram(loader, guide, shape, T=10, n_bins=15, use_cuda=False):
     return confidence, accuracy
 
 
-def empirical_cdf_prob(loader, guide, shape, T=10, use_cuda=False):
+def empirical_cdf_prob(loader, guide, shape, T=10, scale=False, use_cuda=False, num_class=None):
     """return x (probability), y (cdf of probability)"""
     score, label = softmax_logits(loader, guide, shape, T, use_cuda)
     confidence, predictions = torch.max(score, dim=1)
@@ -71,4 +71,7 @@ def empirical_cdf_prob(loader, guide, shape, T=10, use_cuda=False):
     prob_cnt = pd.Series(confidence).value_counts().sort_index()
     cumulative = np.cumsum(prob_cnt.values)
 
-    return prob_cnt.index, cumulative
+    if scale is False:
+        return prob_cnt.index, cumulative
+    else:
+        return num_class*(prob_cnt.index-(1/num_class)), cumulative
