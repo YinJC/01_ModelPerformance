@@ -70,5 +70,5 @@ def empirical_cdf_prob(loader, guide, shape, T=10, use_cuda=False):
 
     prob_cnt = pd.Series(confidence).value_counts().sort_index()
     cumulative = np.cumsum(prob_cnt.values)
-    
+
     return prob_cnt.index, cumulative
