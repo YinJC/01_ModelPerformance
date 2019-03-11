@@ -74,4 +74,4 @@ def empirical_cdf_prob(loader, guide, shape, T=10, scale=False, use_cuda=False, 
     if scale is False:
         return prob_cnt.index, cumulative
     else:
-        return num_class*(prob_cnt.index-(1/num_class)), cumulative
+        return (prob_cnt.index-(1/num_class))/(1-(1/num_class)), cumulative
