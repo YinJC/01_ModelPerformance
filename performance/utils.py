@@ -96,7 +96,7 @@ def uncertainty(loader, guide, shape, T=10, use_cuda=False):
         prob_list.append(prob)
         label_list.append(y)
 
-    alea_list, epis_list, prob_list, label_list = torch.cat(alea, dim=0), torch.cat(epis_list, dim=0), \
+    alea_list, epis_list, prob_list, label_list = torch.cat(alea_list, dim=0), torch.cat(epis_list, dim=0), \
                                                   torch.cat(prob_list, dim=0), torch.cat(label_list, dim=0)  # [batch * dim]
 
     return alea_list, epis_list, prob_list, label_list
